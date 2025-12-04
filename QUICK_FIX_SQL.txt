@@ -1,0 +1,32 @@
+========================================
+QUICK FIX FOR ADMIN PANEL ORDER UPDATES
+========================================
+
+Copy and paste this SQL into Supabase Dashboard → SQL Editor:
+
+----------------------------------------
+DROP POLICY IF EXISTS "Authenticated users can update orders" ON orders;
+
+CREATE POLICY "Anyone can update orders"
+  ON orders
+  FOR UPDATE
+  TO anon, authenticated
+  USING (true)
+  WITH CHECK (true);
+----------------------------------------
+
+Steps:
+1. Open https://supabase.com/dashboard
+2. Select your project
+3. Go to SQL Editor (left sidebar)
+4. Click "New query"
+5. Paste the SQL above
+6. Click "Run" button
+7. Refresh your admin dashboard page
+8. Try updating an order status - it should work!
+
+If you still get errors, check the browser console (F12) for details.
+
+========================================
+
+
